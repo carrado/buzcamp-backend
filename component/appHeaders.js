@@ -45,15 +45,5 @@ router.use(
     })
 );
 
-//connect to database
-var sql =
-    "CREATE TABLE users (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255), nationality VARCHAR(255), state VARCHAR(255), gender VARCHAR(255), school VARCHAR(255), department VARCHAR(255), email VARCHAR(255), username VARCHAR(255), password VARCHAR(255), userId VARCHAR(255), verification VARCHAR(255), token VARCHAR(255), tokenElapse VARCHAR(255))";
-conn.query(sql, function (err, result) {
-    if (result) {
-        console.log("Table created");
-    } else if (err) {
-        console.log(err);
-    }
-});
 
-export { session, sql, conn, CryptoJS, router, http, cookieParser, axios, mysqlStore, jwt, jwt_decode, jwtSecretKey };
+export { session, conn, CryptoJS, router, http, cookieParser, axios, mysqlStore, jwt, jwt_decode, jwtSecretKey };
