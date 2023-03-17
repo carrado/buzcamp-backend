@@ -80,7 +80,7 @@ _router.post("/createuser", function (req, res, next) {
             email: `${data.email}`,
           }
 
-          const token = jwt.sign(tokenData, jwtSecretKey);
+          const token = jwt.sign(decryptedEmail, jwtSecretKey);
 
           res.status(200).send({
             success: true,
@@ -107,9 +107,25 @@ _router.post("/createuser", function (req, res, next) {
               {
                 type: "text/html",
                 value:
-                  '<div style="border: 1px solid #eee; width: 388px; padding: 46px 45px; margin: 50px auto"><span style="margin-top: 20px; font-size: 18px">Use the OTP below to validate your BuzCamp Account:</span><p style="margin-top: 10px; font-weight: bolder; font-size: 20px">' +
-                  data.token +
-                  '</p><span style="margin-top: 13px; font-size: 18px">This token will expire in an hour time. Please do not share this token with anyone.</span><span style="margin-top: 15px; font-size: 18px">Thanks !<p style="font-size: 20px; font-weight: bolder">BuzCamp</p></div>',
+                  '<div style="border: 1px solid #eee; width: 388px; padding: 25px 45px; margin: 50px auto">' +
+                  '<span style="margin-top: -10px;">' +
+                  '<p align="center">' + '<img src="https://res.cloudinary.com/campnet/image/upload/c_scale,w_64/v1672337722/buzcamp_ueebyf.png" />' +
+                  '</p>' +
+                  '<h3 style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5em">' +
+                  '<strong>' + 'Use the OTP below to validate your BuzCamp Account:'+ '</strong>' +
+                  '</h3>' +
+                  '<p style="font-family: Roboto,Helvetica,Arial,sans-serif; margin-top: 10px; font-size: 16px; line-height: 1.5em">' +
+                  data.token + '</p > ' +
+                  '<p style="font-family: Roboto,Helvetica,Arial,sans-serif; margin-top: 10px; font-size: 16px; line-height: 1.5em">' +
+                  'This token will expire in an hour time. Please do not share this token with anyone.' +
+                  '<span style="margin-top: 35px;">' +
+                  '<p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5em">' +
+                  'Thanks,' +
+                  '</p>' +
+                  '<p style="font-family: Roboto,Helvetica,Arial,sans-serif; font-size: 16px; line-height: 1.5em">' +
+                  '<strong>' + 'Carrado Team' + '</strong> </p>' +
+                  '</span>'+
+                  '</div>',
               },
             ],
           };
@@ -128,7 +144,7 @@ _router.post("/createuser", function (req, res, next) {
 
           axios
             .request(options)
-            .then((data) => res.json(data))
+            .then((data) => console.log(data))
             .catch((err) => next(err));
         }
       });
@@ -139,26 +155,5 @@ _router.post("/createuser", function (req, res, next) {
 
 
 
-
-
-
-
-_router.get("/_grantprm/:id", (req, res) => {
-  const token = req.params.id;
-
-  var decoded = jwt_decode(token);
-  
-  let sql = `SELECT * FROM users WHERE email = '${decoded.email}' AND token != ''`;
-  conn.query(sql, (err, results) => {
-    if (results.length === 0) {
-    }
-    else {
-      res.status(200).send({
-        success: true,
-        subscribed: false,
-      });
-    }
-  })
-});
 
 export default _router;

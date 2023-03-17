@@ -31,6 +31,8 @@ app.use(express.static("public"));
 app.use("/images", express.static("public/media/t/v16"));
 
 
+
+
 /**
  * Route to authentication Endpoints
  */
@@ -56,7 +58,9 @@ app.use("/authenticate/", passwordToken);
 app.use("/authenticate/", reset);
 
 
+import geoLocator from "./geolocator/index.js";
 
+app.use("/locator/", geoLocator);
 
 /* import onBoard from "./onboarding/init.js";
 
