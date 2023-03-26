@@ -19,7 +19,7 @@ app.use(cookieParser());
 
 
 const corsOptions = {
-  origin: 'https://buzcamp.com',
+  origin: false,
   optionSuccessStatus: 200
 }
 
