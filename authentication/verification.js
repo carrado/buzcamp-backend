@@ -1,10 +1,7 @@
 import { router as _router, CryptoJS as _CryptoJS, conn as _mysqlConn, jwt, axios, jwtSecretKey } from "../component/appHeaders.js";
 
 _router.post("/verifyAccount", function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x - client - key, x - client - token, x - client - secret, Authorization");
-
+    
     var currentTime = Math.floor(Date.now() / 1000).toString();
 
     var token = req.body.__tkLd5a;
