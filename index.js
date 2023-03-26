@@ -19,7 +19,8 @@ app.use(cookieParser());
 
 
 const corsOptions = {
-  origin: false,
+  origin: '*',
+  credentials: true,
   optionSuccessStatus: 200
 }
 
