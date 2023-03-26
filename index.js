@@ -8,8 +8,6 @@ import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config()
 
-app.use(cors());
-
 //To parse URL encoded data
 app.use(urlencoded({ extended: false }));
 
@@ -21,10 +19,11 @@ app.use(cookieParser());
 
 
 const corsOptions = {
-  origin: '*',
-  credentials: true,            //access-control-allow-credentials:true
+  origin: 'https://buzcamp.com',
   optionSuccessStatus: 200
 }
+
+app.use(cors(corsOptions));
 
 
 app.use(express.static("public"));
